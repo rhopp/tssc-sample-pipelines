@@ -45,6 +45,7 @@ spec:
           else
             origin_with_auth=https://${password}@${remote_without_protocol}.git
           fi
+          echo -e "[credential \"https://$remote_without_protocol"]\n  helper = store" > "${HOME}/.gitconfig"
         else
           echo "git credentials to push into gitops repository ${PARAM_GITOPS_REPO_URL} is not configured."
           echo "gitops repository is not updated automatically."
