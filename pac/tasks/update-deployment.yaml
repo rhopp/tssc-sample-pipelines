@@ -33,6 +33,7 @@ spec:
         - name: PARAM_IMAGE
           value: $(params.image)
       script: |
+        set -x
         if test -f /gitops-auth-secret/password ; then
           gitops_repo_url=${PARAM_GITOPS_REPO_URL%'.git'}
           remote_without_protocol=${gitops_repo_url#'https://'}
@@ -64,6 +65,7 @@ spec:
         git clone ${PARAM_GITOPS_REPO_URL}
         gitops_repo_name=$(basename ${gitops_repo_url})
         cd ${gitops_repo_name}
+        set +x
 
         component_name=$(yq .metadata.name application.yaml)
         deployment_patch_filepath="components/${component_name}/overlays/development/deployment-patch.yaml"
