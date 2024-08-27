@@ -45,7 +45,7 @@ spec:
           else
             origin_with_auth=https://${password}@${remote_without_protocol}.git
           fi
-          echo -e "[credential \"https://$remote_without_protocol\"]\n  helper = store" > "${HOME}/.gitconfig"
+          echo -e "[credential \"https://${remote_without_protocol}\"]\n  helper = store" > "${HOME}/.gitconfig"
         else
           echo "git credentials to push into gitops repository ${PARAM_GITOPS_REPO_URL} is not configured."
           echo "gitops repository is not updated automatically."
@@ -53,6 +53,10 @@ spec:
           echo "TODO: configure git credentials to update gitops repository."
           exit 0
         fi
+
+        ls -la $HOME
+        cat $HOME/.gitconfig
+        cat $HOME/.git-credentials
 
         git config --global user.email "rhtap@noreplay.com"
         git config --global user.name "gitops-update"
