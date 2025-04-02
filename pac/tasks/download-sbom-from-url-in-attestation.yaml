@@ -43,9 +43,9 @@ spec:
       See the description for more details.
     type: string
   - name: CA_TRUST_CONFIG_MAP_NAME
-      description: The name of the ConfigMap to read CA bundle data from.
-      type: string
-      default: config-trusted-cabundle
+    description: The name of the ConfigMap to read CA bundle data from.
+    type: string
+    default: config-trusted-cabundle
   - name: SBOMS_DIR
     default: "."
     description: >-
