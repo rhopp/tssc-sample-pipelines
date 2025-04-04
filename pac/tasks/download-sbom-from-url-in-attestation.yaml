@@ -80,22 +80,10 @@ spec:
     type: string
     description: TUF mirror URL. Provide a value when NOT using public sigstore deployment.
     default: ""
-  volumes:
-    - name: trusted-ca
-      configMap:
-        items:
-          - key: $(params.CA_TRUST_CONFIG_MAP_KEY)
-            path: ca-bundle.crt
-        name: $(params.CA_TRUST_CONFIG_MAP_NAME)
-        optional: true
   workspaces:
   - name: sboms
     description: SBOMs will be downloaded to (a subdirectory of) this workspace.
   stepTemplate:
-    volumeMounts:
-      - mountPath: /mnt/trusted-ca
-        name: trusted-ca
-        readOnly: true
     env:
     - name: IMAGES
       value: $(params.IMAGES)
@@ -120,7 +108,7 @@ spec:
       #!/usr/bin/env bash
       set -o errexit -o nounset -o pipefail
 
-      ca_bundle=/mnt/trusted-ca/ca-custom-bundle.crt
+      ca_bundle=/tekton-custom-certs/ca-bundle.crt
       if [ -f "$ca_bundle" ]; then
         echo "INFO: Using mounted CA bundle: $ca_bundle"
         cp -vf $ca_bundle /etc/pki/ca-trust/source/anchors
@@ -163,7 +151,7 @@ spec:
       set -o errexit -o nounset -o pipefail
 
       set -x
-      ca_bundle=/mnt/trusted-ca/ca-custom-bundle.crt
+      ca_bundle=/tekton-custom-certs/ca-bundle.crt
       if [ -f "$ca_bundle" ]; then
         echo "INFO: Using mounted CA bundle: $ca_bundle"
         cp -vf $ca_bundle /etc/pki/ca-trust/source/anchors
