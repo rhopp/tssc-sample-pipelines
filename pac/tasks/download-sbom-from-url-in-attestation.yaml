@@ -32,20 +32,11 @@ spec:
 
     [gather-deploy-images]: https://github.com/redhat-appstudio/build-definitions/tree/main/task/gather-deploy-images
   params:
-  - name: CA_TRUST_CONFIG_MAP_KEY
-    description: The name of the key in the ConfigMap that contains the
-      CA bundle data.
-    type: string
-    default: ca-bundle.crt
   - name: IMAGES
     description: >-
       JSON object containing the array of images whose SBOMs should be downloaded.
       See the description for more details.
     type: string
-  - name: CA_TRUST_CONFIG_MAP_NAME
-    description: The name of the ConfigMap to read CA bundle data from.
-    type: string
-    default: config-trusted-cabundle
   - name: SBOMS_DIR
     default: "."
     description: >-
@@ -150,7 +141,6 @@ spec:
       #!/usr/bin/env bash
       set -o errexit -o nounset -o pipefail
 
-      set -x
       ca_bundle=/tekton-custom-certs/ca-bundle.crt
       if [ -f "$ca_bundle" ]; then
         echo "INFO: Using mounted CA bundle: $ca_bundle"
