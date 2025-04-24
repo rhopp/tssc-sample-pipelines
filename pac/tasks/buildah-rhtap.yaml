@@ -69,7 +69,7 @@ spec:
     args:
       - $(params.BUILD_ARGS[*])
     script: |
-
+      echo "TEST"
       ca_bundle=/tekton-custom-certs/ca-bundle.crt
       if [ -f "$ca_bundle" ]; then
         echo "INFO: Using mounted CA bundle: $ca_bundle"
