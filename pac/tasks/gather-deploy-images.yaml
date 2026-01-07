@@ -37,6 +37,7 @@ spec:
         - $(params.ENVIRONMENTS[*])
       script: |
         #!/bin/bash
+        echo "Test echo get-images-per-env"
         set -euo pipefail
         set -x
 
