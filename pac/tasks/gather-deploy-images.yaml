@@ -37,6 +37,7 @@ spec:
       - $(params.ENVIRONMENTS[*])
     script: |
       #!/bin/bash
+      set -x
       set -euo pipefail
 
       IMAGE_PATH='.spec.template.spec.containers[0].image'
