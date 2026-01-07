@@ -38,6 +38,7 @@ spec:
       script: |
         #!/bin/bash
         set -euo pipefail
+        set -x
 
         IMAGE_PATH='.spec.template.spec.containers[0].image'
         IMAGES_FILE='/tmp/all-images.txt'
